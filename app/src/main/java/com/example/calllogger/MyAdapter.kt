@@ -41,8 +41,6 @@ class MyAdapter(private val context: Context, val logs: MutableList<MyCallLog>) 
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        val log = logs[position]
-
         // if there is no name put number
         holder.name.text = (if (logs[position].name.isNullOrBlank()) {
             logs[position].number
@@ -65,12 +63,12 @@ class MyAdapter(private val context: Context, val logs: MutableList<MyCallLog>) 
         }
     }
     // convert seconds to MM:SS
-    private fun modifiedDuration(duration: Int): CharSequence? {
+    private fun modifiedDuration(duration: Int): CharSequence {
         if (duration < 60) {
             return duration.toString()
         }
-        val minutes = (duration / 60)
-        val seconds = duration - minutes * 60
+        val minutes = duration / 60
+        val seconds = duration % 60
         return "$minutes:$seconds"
     }
 
@@ -79,9 +77,8 @@ class MyAdapter(private val context: Context, val logs: MutableList<MyCallLog>) 
         return when (type) {
             1 -> "Incoming"
             2 -> "Outgoing"
-            else -> {
-                " "
-            }
+            else -> " "
+
         }
     }
 }

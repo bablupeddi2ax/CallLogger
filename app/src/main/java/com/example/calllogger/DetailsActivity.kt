@@ -21,21 +21,22 @@ class DetailsActivity : AppCompatActivity() {
         val number = intent.getStringExtra("number")
         val name = intent.getStringExtra("name")
 
+        // assign the contact name and contact  number
         val txtName = findViewById<TextView>(R.id.txtName)
         val txtNumber = findViewById<TextView>(R.id.txtNumber)
-
         txtName.text = name
         txtNumber.text = number
-        // fetch history of the current number
+
+        // fetch history of the current number (grouping call logs )
         val history = GlobalData.callLogHistory[number]
 
 
         recyclerView = findViewById(R.id.detailRecyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this@DetailsActivity)
         // check if not null or empty
-        if (!history.isNullOrEmpty()) {
+       history?.let{
             myAdapter = MyAdapter(this@DetailsActivity, history)
             recyclerView.adapter = myAdapter
-            recyclerView.layoutManager = LinearLayoutManager(this@DetailsActivity)
             myAdapter.onItemClickListener = null
         }
 
