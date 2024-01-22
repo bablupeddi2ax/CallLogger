@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
     private val pageSize = 10
     private var isEnd = false
     // Request code for reading call logs permission
-    object REQUEST_CODE {
+     object REQUEST_CODE {
         const val code = 100
     }
 
